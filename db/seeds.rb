@@ -51,7 +51,7 @@ Patient.create(
                gender: "male",
                date_of_birth: "2011-07-07")
 Patient.create(
-               ssn: 123456789,
+               ssn: 1234567890,
                name: "Joan Watson",
                gender: "female",
                date_of_birth: "2012-10-17")
