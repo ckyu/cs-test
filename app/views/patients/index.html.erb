@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>SSN</th>
       <th>Name</th>
       <th>Date of birth</th>
       <th>Gender</th>
@@ -15,6 +16,7 @@
   <tbody>
     <% @patients.each do |patient| %>
       <tr>
+        <td><%= patient.ssn %></td>
         <td><%= patient.name %></td>
         <td><%= patient.date_of_birth %></td>
         <td><%= patient.gender %></td>
