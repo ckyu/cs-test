@@ -15,5 +15,22 @@
   <%= @patient.gender %>
 </div>
 
+<table>
+  <% @reports.each do |report| %>
+    <tr>
+      <td>Date</td>
+      <td><%= report.date %></td>
+    </tr>
+    <tr>
+      <td>Report</td>
+      <td><%= report.name %></td>
+    </tr>
+    <tr>
+      <td>Physician</td>
+      <td><%= report.physician %></td>
+    </tr>
+  <% end %>
+</table>
+
 <%= link_to 'Edit', edit_patient_path(@patient) %> |
 <%= link_to 'Back', patients_path %>

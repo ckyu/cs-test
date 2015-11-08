@@ -1,1 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+steven:
+  ssn: 343434342
+  name: "Steven Universe"
+  date_of_birth: "2012/04/15"
+  gender: "male"

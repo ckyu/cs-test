@@ -1,4 +1,5 @@
 class Patient < ActiveRecord::Base
+  has_many :reports
 
   validates :ssn, length: {is: 10, message: 'must be exactly %{count} digits'}
 
