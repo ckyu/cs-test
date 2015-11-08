@@ -1,3 +1,6 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
 body {
   background-color: #fff;
   color: #333;
@@ -70,4 +73,9 @@ div {
     font-size: 12px;
     list-style: square;
   }
+}
+
+/* patient */
+.patient-header {
+  background-color: #3ED696;
 }

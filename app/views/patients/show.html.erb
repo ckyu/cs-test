@@ -1,19 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @patient.name %>
-</p>
+<div class="row patient-header">
+    <h1><%= @patient.name %>
+    <small>#<%= @patient.ssn %></h1>
+</div>
 
-<p>
+<div class="row">
   <strong>Date of birth:</strong>
   <%= @patient.date_of_birth %>
-</p>
 
-<p>
+  <br />
+
   <strong>Gender:</strong>
   <%= @patient.gender %>
-</p>
+</div>
 
 <%= link_to 'Edit', edit_patient_path(@patient) %> |
 <%= link_to 'Back', patients_path %>
