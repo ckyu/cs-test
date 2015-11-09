@@ -1,7 +1,8 @@
 class ReportsController < ApplicationController
 
   def index
-    render :text => "Hello!"
+    appkey = Rails.application.config.application_key
+    render :text => "#{appkey}\nlength: #{appkey.length}"
   end
 
   # POST /save
