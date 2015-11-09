@@ -8,8 +8,9 @@ class ReportsController < ApplicationController
   def create
     payload = params[:payload]
     ssns = payload.keys
+    logger.debug "#{ssns}"
     ssn = ssns.first
-    # ssns.each do |ssn|
+
     @patient = Patient.find_by(ssn: ssn)
     @reports = payload[ssn]
 
@@ -21,7 +22,25 @@ class ReportsController < ApplicationController
       report.location = raw_report_data[:location] || ""
       if report.save
         logger.debug "Report saved!"
+        data = raw_report_data[:data]
+        
+        data.each do |name, raw_data|
+          lab_datum = report.lab_data.build
+          lab_datum.name = name
+          lab_datum.value = raw_data[:value]
+          lab_datum.unit = raw_data[:unit] || ""
+          lab_datum.normal_range = raw_data[:normal_range] || "" 
+
+          if lab_datum.save
+            logger.debug "Data saved!"
+          else
+            logger.debug "Data not saved..."
+          end
+
+        end
+
       else
+        # send error message
         logger.debug "Something went wrong!"
       end
     end

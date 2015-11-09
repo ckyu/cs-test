@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  report_id: 
+  name: MyText
+  value: MyString
+  unit: MyString
+  normal_range: MyString
+
+two:
+  report_id: 
+  name: MyText
+  value: MyString
+  unit: MyString
+  normal_range: MyString

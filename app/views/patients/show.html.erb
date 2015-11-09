@@ -1,35 +1,62 @@
 <p id="notice"><%= notice %></p>
 
-<div class="row patient-header">
-    <h1><%= @patient.name %>
-    <small>#<%= @patient.ssn %></h1>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>
+      <%= @patient.name %>
+      <small>#<%= @patient.ssn %></small>
+    </h2>
+  </div>
+  <div class="panel-body">
+    <strong>Date of birth:</strong>
+    <%= @patient.date_of_birth %>
+
+    <br />
+
+    <strong>Gender:</strong>
+    <%= @patient.gender_displayname %>
+  </div>
 </div>
 
-<div class="row">
-  <strong>Date of birth:</strong>
-  <%= @patient.date_of_birth %>
-
-  <br />
-
-  <strong>Gender:</strong>
-  <%= @patient.gender %>
-</div>
 
 <% @reports.each do |report| %>
-<table>
-    <tr>
-      <td><b>Date</b></td>
-      <td><%= report.date %></td>
-    </tr>
-    <tr>
-      <td><b>Report</b></td>
-      <td><%= report.name %></td>
-    </tr>
-    <tr>
-      <td><b>Physician</b></td>
-      <td><%= report.physician %></td>
-    </tr>
-</table><br />
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h5><%= report.name %></h5>
+
+      <div class="row">
+        <div class="col-md-4"><%= report.physician %></div>
+        <div class="col-md-4"><%= report.date %></div>
+        <div class="col-md-4"><%= report.location %></div>
+      </div>
+
+    </div>
+
+    <% if !report.lab_data.blank? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Value</th>
+            <th>Unit</th>
+            <th>Normal Range</th>
+          </tr>
+        </thead>
+      <% report.lab_data.each do |data| %>
+
+          <tbody>
+            <tr>
+              <td><%= data.name %></td>
+              <td><%= data.value %></td>
+              <td><%= data.unit %></td>
+              <td><%= data.normal_range %></td>
+            </tr>
+          </tbody>
+
+      <% end %>
+      </table>
+    <% end %>
+  </div>
 <% end %>
 
 <%= link_to 'Edit', edit_patient_path(@patient) %> |

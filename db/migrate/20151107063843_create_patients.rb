@@ -4,7 +4,7 @@ class CreatePatients < ActiveRecord::Migration
       t.string :ssn, :limit => 10, null: false
       t.string :name
       t.date :date_of_birth
-      t.string :gender
+      t.integer :gender, :limit => 1
 
       t.timestamps null: false
     end
