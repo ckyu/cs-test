@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
 
   # POST /save
   def create
-    payload = params[:payload]
+    payload = JSON.parse(params[:payload])
 
     ssns = payload.keys
     ssn = ssns.first
@@ -13,16 +13,19 @@ class ReportsController < ApplicationController
     @reports = payload[ssn]
 
     @reports.each do |name, raw_report| 
-      report = @patient.reports.build({:name => name, :physician => raw_report[:physician], :location => raw_report[:location], :date => raw_report[:date]})
+      data = raw_report["data"] 
+      report = @patient.reports.build({:name => name, :physician => raw_report["physician"], :location => raw_report["location"], :date => raw_report["date"]})
       if report.save
-        data = raw_report[:data]  
         data.each do |name, raw_data|
+          logger.debug "name: #{name}\nraw_data: #{raw_data}"
 
-          lab_datum = report.lab_data.build({:name => name, :value => raw_data[:value], :unit => raw_data[:unit] || "", :normal_range => raw_data[:normal_range] || ""})  
+          lab_datum = report.lab_data.build({:name => name, :value => raw_data["value"], :unit => raw_data["unit"] || "", :normal_range => raw_data["normal_range"] || ""})  
+          logger.debug lab_datum.value
+
           if lab_datum.save
             logger.debug "Data saved!"
           else
-            render text: "ERROR: Malformed data.", status: 500
+            # render text: "ERROR: Malformed data.", status: 500 
             logger.debug "Data not saved..."
           end
         end
