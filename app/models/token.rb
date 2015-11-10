@@ -1,6 +1,10 @@
 class Token < ActiveRecord::Base
   before_create :generate_access_token
 
+  def expired?
+    Time.now > self.expires_on
+  end
+
   private
 
     def generate_access_token

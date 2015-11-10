@@ -1,19 +1,13 @@
 class ReportsController < ApplicationController
 
-  def index
-    appkey = Rails.application.config.application_key
-    render :text => "#{appkey}\nlength: #{appkey.length}"
-  end
+  before_action :authenticate
 
   # POST /save
   def create
     payload = params[:payload]
-    raw_token = params[:token]
 
     ssns = payload.keys
     ssn = ssns.first
-
-    @token = nil unless Token.find_by(token: raw_token)
 
     @patient = Patient.find_by(ssn: ssn)
     @reports = payload[ssn]
@@ -28,17 +22,29 @@ class ReportsController < ApplicationController
           if lab_datum.save
             logger.debug "Data saved!"
           else
+            render text: "ERROR: Malformed data.", status: 500
             logger.debug "Data not saved..."
           end
         end
       else
-        # send error message
+        render text: "ERROR: Malformed data.", status: 500
         logger.debug "Something went wrong!"
       end # end report.save
+
+      render text: "OK", :status => 200
+
     end # end reports.each
   end
 
   private
+
+    def authenticate
+      @token = Token.find_by(token: params[:token]) || nil
+      if @token.nil? || @token.expired?
+        render text: "ERROR: Invalid token.", status: 500
+        # redirect_to "/", notice: "Your token is invalid."
+      end
+    end
 
     def report_params
       params.require(:report).permit(:name, :physician, :date, :location)
