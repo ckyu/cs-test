@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :patients, param: :ssn
-  resources :reports, :defaults => { :format => 'json'}
+  resources :patients, param: :ssn#, only: [:show, :index]
+  resources :reports, only: [:create], defaults: { :format => 'json'}
 
   post '/save' => 'reports#create'
   post '/token' => 'tokens#new'
