@@ -12,16 +12,7 @@ class PatientsController < ApplicationController
   def show
     @patient = Patient.find_by_ssn(params[:ssn])
     @reports = @patient.reports.all
-    render json: {:patient=>@patient, :reports=>@reports}
-  end
-
-  # GET /patients/new
-  def new
-    @patient = Patient.new
-  end
-
-  # GET /patients/1/edit
-  def edit
+    # render json: {:patient=>@patient, :reports=>@reports}
   end
 
   # POST /patients
