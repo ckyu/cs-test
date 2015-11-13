@@ -15,7 +15,7 @@ class LabDatum < ActiveRecord::Base
   end
 
   def warning?
-    if !numeric?(self.value) && self.normal_range == ""
+    if !numeric?(self.value) || self.normal_range == ""
       return false
     end
 
@@ -27,7 +27,7 @@ class LabDatum < ActiveRecord::Base
   end
 
   def critical?
-    if !numeric?(self.value) && self.normal_range == ""
+    if !numeric?(self.value) || self.normal_range == ""
       return false
     end
 

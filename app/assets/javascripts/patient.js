@@ -7,24 +7,17 @@ app.config(function($routeProvider, $locationProvider) {
       templateUrl: 'index.html',
       controller: 'TestCtrl',
       controllerAs: 'test',
-      // resolve: {
-      //   // 1 second delay
-      //   delay: function($q, $timeout) {
-      //     var delay = $q.defer();
-      //     $timeout(delay.resolve, 1000);
-      //     return delay.promise;
-      //   }
-      // }
     })
     .otherwise({ 
-      redirectTo: '/404.html'
+      redirectTo: '/'
     });
     $locationProvider
       .html5Mode(true);
 });
 
+// Factory
 app.factory('Patient', ['$resource', function($resource) {
-  return $resource('/patients/:ssn', {ssn: "@ssn"});
+  return $resource('/patients/:ssn.json', {ssn: "@ssn"});
 }]);
 
 var controllers = {};

@@ -75,7 +75,42 @@ div {
   }
 }
 
+/* Patient */
+.patient-info {
+  .panel-heading {
+    background-color: #93C847;
+    border-color: #93C847;
+  }
+  margin-top: 5em;
+  border-color: #93C847;
+  color: #fff;
+}
+
 /* Report table */
+.report-info {
+  .panel-heading {
+    background-color: #EBF5D6;
+    color: #58821B;
+  }
+  border-color: #EBF5D6;
+  margin-bottom: 5em;
+}
+
+.lab-data {
+  th {
+   color: #58821B; 
+  }
+  td {
+    font-size: 0.9em;
+  }
+  .data-label {
+    min-width: 25px;
+  }
+  .data-name {
+    width: 40%;
+  }
+}
+
 .critical {
   color: red;
 }

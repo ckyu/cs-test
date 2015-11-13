@@ -19,15 +19,17 @@ class LabDatumTest < ActiveSupport::TestCase
   end
 
   test "warning value" do
-    @data.normal_range = "1-5"
+    @data.normal_range = "3-5"
     @data.value = "5.4"
-    @data.save
+    assert_not @data.critical?
+    assert @data.warning?
+    
+    @data.value = "2.8"
     assert_not @data.critical?
     assert @data.warning?
   end
 
   test "non-numeric value should not be critical or warning" do
-    @data.save
     assert_not @data.critical?
     assert_not @data.warning?
   end

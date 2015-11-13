@@ -5,22 +5,15 @@
 <table>
   <thead>
     <tr>
-      <th>SSN</th>
       <th>Name</th>
-      <th>Date of birth</th>
-      <th>Gender</th>
-      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @patients.each do |patient| %>
       <tr>
-        <td><%= patient.ssn %></td>
         <td><%= patient.name %></td>
-        <td><%= patient.date_of_birth %></td>
-        <td><%= patient.gender %></td>
-        <td><%= link_to 'Show', patient %></td>
+        <td><a href="/patient/<%= patient.ssn %>">Show</a></td>
       </tr>
     <% end %>
   </tbody>

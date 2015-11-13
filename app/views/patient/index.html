@@ -1,44 +1,68 @@
 <div ng-controller="TestCtrl as test" class="row">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="row">
+        <div class="navbar-header">
+          <span class="glyphicon glyphicon-heart-empty navbar-brand"></span>
+        </div>
+  
+        <ul class="nav navbar-nav">
+              <li><a href="/patients" target="_self">Patients</a></li>
+              <li class="active"><a href="#top" target="_self">{{ patient.name }}</a></li>
+          </ul>
+
+        <div class="col-md-offset-8">
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search" ng-model="query">
+              <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </nav>
+
   <div class="col-md-8 col-md-offset-2">
 
     <!-- Header -->
-    <div class="panel panel-primary">
+    <div class="panel patient-info" id="#top">
       <div class="panel-heading">
-        <h2>
-          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-          {{ patient.name }}
-          <small>#{{ patient.ssn }}</small>
-        </h2>
-      </div>
-      <div class="panel-body">
-        <strong>Date of birth:</strong>
-        {{ patient.date_of_birth }}
+        <div class="row">
+          <div class="col-md-2">
+            <center>
+            <h1 style="font-size: 5em"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></h1>
+            </center>
+          </div>
 
-        <br />
-
-        <strong>Gender:</strong>
-        {{ patient.gender }}
+          <div class="col-md-10">
+            <h2><strong>{{ patient.name }}</strong></h2>
+            <h6>
+              <strong>ID:</strong> #{{ patient.ssn }}<br />
+              <strong>Birthday:</strong> {{ patient.date_of_birth }}<br />
+              <strong>Gender:</strong> {{ patient.gender }}
+            </h6>
+          </div>
+        </div>
       </div>
     </div> <!-- end header -->
 
     <!-- Reports -->
-    <div class="panel panel-info" ng-repeat="report in patient.reports">
+    <div class="panel report-info" ng-repeat="report in patient.reports | filter:query">
        <div class="panel-heading">
-        <h5>{{ report.name }}</h5>
-        <div class="row">
-          <div class="col-md-4">Physician: {{ report.physician }}</div>
-          <div class="col-md-4">Date: {{ report.date }}</div>
-          <div class="col-md-4">Location: {{ report.location }}</div>
+          <h3>{{ report.name }}</h3>
+          <strong>Date:</strong> {{ report.date }}<br />
+          <strong>Physician:</strong> {{ report.physician }}<br />
+          <strong>Location:</strong> {{ report.location }}<br />
+
         </div>
 
-      </div>
-
       <!-- Report data -->
-      <table class="table">
+      <table class="table lab-data">
         <thead>
           <tr>
-            <th></th>
-            <th>Name</th>
+            <th class="data-label"></th>
+            <th class="data-name">Name</th>
             <th>Value</th>
             <th>Unit</th>
             <th>Normal Range</th>
@@ -47,7 +71,7 @@
  
         <tbody>
           <tr ng-repeat="data in report.data">
-            <td>
+            <td class="data-label">
               <!-- critical/warning label -->
               <span ng-show="data.label == 'warning'" class="ng-hide">
                 <span class="glyphicon glyphicon-exclamation-sign warning" title="warning"></span>
@@ -57,7 +81,7 @@
                 <span class="glyphicon glyphicon-warning-sign critical" title="critical"></span>
               </span>
             </td>
-            <td>{{ data.name }}</td>
+            <td class="data-name">{{ data.name }}</td>
             <td>{{ data.value }}</td>
             <td>{{ data.unit }}</td>
             <td>{{ data.normal_range }}</td>

@@ -2,17 +2,15 @@ class PatientsController < ApplicationController
   before_action :set_patient, only: [:show]
 
   # GET /patients
-  # GET /patients.json
   def index
     @patients = Patient.all
+    respond_to :html
   end
 
   # GET /patients/1
-  # GET /patients/1.json
   def show
-    @patient = Patient.find_by_ssn(params[:ssn])
     if @patient.nil?
-      render nothing: true, status: 404
+      render nothing: true, status: 404 and return
     end
   end
 
