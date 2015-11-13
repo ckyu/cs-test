@@ -2,24 +2,36 @@ class LabDatum < ActiveRecord::Base
   belongs_to :report
   attr_accessor :value_min, :value_max
   validates :value, presence: true
-  before_save :parse_normal_range   # error if cannot be parsed
+
+  def label
+    parse_normal_range
+    if self.critical? 
+      return "critical" 
+    elsif self.warning? 
+      return "warning"
+    else
+      return ""
+    end
+  end
 
   def warning?
-    if !numeric?(self.value)
+    if !numeric?(self.value) && self.normal_range == ""
       return false
     end
 
+    parse_normal_range
     # consider doing an if-else instead of this
     # maybe it's more costly?
-    (@value_min...1.1*@value_min).include?(self.value.to_f) ||
+    (0.9*@value_min...@value_min).include?(self.value.to_f) ||
     (@value_max...1.1*@value_max).include?(self.value.to_f)
   end
 
   def critical?
-    if !numeric?(self.value)
+    if !numeric?(self.value) && self.normal_range == ""
       return false
     end
 
+    parse_normal_range
     if self.value.to_f < 0.9 * @value_min || self.value.to_f > 1.1 * @value_max
       return true
     else

@@ -17,6 +17,7 @@ class ReportsController < ApplicationController
           if !lab_datum.save
             render text: "Error: Malformed data.", status: 500
           end
+          logger.debug lab_datum.value_min
         end
       else
         render text: "Error: Malformed data.", status: 500

@@ -18,6 +18,7 @@ if !@patient.nil?
       end
       if data.normal_range != ""
         json.normal_range data.normal_range
+        json.label data.label
       end
     end
   end

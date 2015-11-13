@@ -5,6 +5,7 @@
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h2>
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
           {{ patient.name }}
           <small>#{{ patient.ssn }}</small>
         </h2>
@@ -32,9 +33,11 @@
 
       </div>
 
+      <!-- Report data -->
       <table class="table">
         <thead>
           <tr>
+            <th></th>
             <th>Name</th>
             <th>Value</th>
             <th>Unit</th>
@@ -44,6 +47,16 @@
  
         <tbody>
           <tr ng-repeat="data in report.data">
+            <td>
+              <!-- critical/warning label -->
+              <span ng-show="data.label == 'warning'" class="ng-hide">
+                <span class="glyphicon glyphicon-exclamation-sign warning" title="warning"></span>
+              </span>
+
+              <span ng-show="data.label == 'critical'" class="ng-hide">
+                <span class="glyphicon glyphicon-warning-sign critical" title="critical"></span>
+              </span>
+            </td>
             <td>{{ data.name }}</td>
             <td>{{ data.value }}</td>
             <td>{{ data.unit }}</td>
@@ -51,10 +64,9 @@
           </tr>
         </tbody>
 
-      </table>
+      </table> <!-- end report data -->
 
     </div> <!-- end reports -->
-
 
   </div> <!-- end container -->
 
