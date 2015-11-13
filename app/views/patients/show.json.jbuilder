@@ -7,7 +7,7 @@ if !@patient.nil?
   json.reports @patient.reports.all do |report|
     json.name       report.name
     json.physician  report.physician
-    json.date       report.date
+    json.date       report.date.strftime("%Y-%m-%d")
     json.location   report.location
 
     json.data report.lab_data do |data|

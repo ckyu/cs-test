@@ -112,7 +112,7 @@ class DataGenerator
       when 1
         value_min = [0, rand*rand(10)].sample
         value_max = value_min == 0 ? 0.1 : value_min + rand*rand(10)
-        data[:value] = rand(value_min..1.5*value_max)
+        data[:value] = "%.4f" % rand(value_min..1.5*value_max)
   
         case rand(2)
         when 0
@@ -121,7 +121,7 @@ class DataGenerator
 
         case rand(2)
         when 0
-          data[:normal_range] = "#{value_min} - #{value_max}"
+          data[:normal_range] = "%.4f - %.4f" % [value_min, value_max]
         end
       end
 

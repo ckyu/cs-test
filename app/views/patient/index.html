@@ -1,18 +1,61 @@
-<div ng-controller="TestCtrl as test">
-<p>Name: {{patient.name}}</p>
-<p>Birthday: {{patient.date_of_birth}}</p>
+<div ng-controller="TestCtrl as test" class="row">
+  <div class="col-md-8 col-md-offset-2">
 
-<ul>
-  <li ng-repeat="report in patient.reports">{{report.name}}</li>
-</ul>
+    <!-- Header -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h2>
+          {{ patient.name }}
+          <small>#{{ patient.ssn }}</small>
+        </h2>
+      </div>
+      <div class="panel-body">
+        <strong>Date of birth:</strong>
+        {{ patient.date_of_birth }}
 
-<div>
-Error: {{error}}
-</div>
+        <br />
 
-<div>
-Message: {{message}}
-</div>
+        <strong>Gender:</strong>
+        {{ patient.gender }}
+      </div>
+    </div> <!-- end header -->
 
-<p>Patient: {{patient}}</p>
-</div>
+    <!-- Reports -->
+    <div class="panel panel-info" ng-repeat="report in patient.reports">
+       <div class="panel-heading">
+        <h5>{{ report.name }}</h5>
+        <div class="row">
+          <div class="col-md-4">Physician: {{ report.physician }}</div>
+          <div class="col-md-4">Date: {{ report.date }}</div>
+          <div class="col-md-4">Location: {{ report.location }}</div>
+        </div>
+
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Value</th>
+            <th>Unit</th>
+            <th>Normal Range</th>
+          </tr>
+        </thead>
+ 
+        <tbody>
+          <tr ng-repeat="data in report.data">
+            <td>{{ data.name }}</td>
+            <td>{{ data.value }}</td>
+            <td>{{ data.unit }}</td>
+            <td>{{ data.normal_range }}</td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div> <!-- end reports -->
+
+
+  </div> <!-- end container -->
+
+</div> <!-- end ng-controller -->

@@ -11,8 +11,8 @@ class LabDatum < ActiveRecord::Base
 
     # consider doing an if-else instead of this
     # maybe it's more costly?
-    (0.9*@value_min...1.1*@value_min).include?(self.value.to_f) ||
-    (0.9*@value_max...1.1*@value_max).include?(self.value.to_f)
+    (@value_min...1.1*@value_min).include?(self.value.to_f) ||
+    (@value_max...1.1*@value_max).include?(self.value.to_f)
   end
 
   def critical?

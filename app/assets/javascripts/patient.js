@@ -1,19 +1,20 @@
 var app = angular.module('caresharing', ['ngResource','ngRoute']);
 
+// Routes
 app.config(function($routeProvider, $locationProvider) {
   $routeProvider
     .when('/patient/:ssn', {
       templateUrl: 'index.html',
       controller: 'TestCtrl',
       controllerAs: 'test',
-      resolve: {
-        // 1 second delay
-        delay: function($q, $timeout) {
-          var delay = $q.defer();
-          $timeout(delay.resolve, 1000);
-          return delay.promise;
-        }
-      }
+      // resolve: {
+      //   // 1 second delay
+      //   delay: function($q, $timeout) {
+      //     var delay = $q.defer();
+      //     $timeout(delay.resolve, 1000);
+      //     return delay.promise;
+      //   }
+      // }
     })
     .otherwise({ 
       redirectTo: '/404.html'
@@ -44,13 +45,14 @@ controllers.TestCtrl = function ($scope, $route, $routeParams, $interval, $windo
         }
       });
 
+    // 5-second refresh behavior
     var ctr = 0;
     $scope.message="This DIV is refreshed "+ctr+" time.";
     $interval(function() {
       $scope.message = "This DIV has been refreshed " + ctr + " times.";
       ctr += 1;
       $scope.patient = Patient.get({ssn: $routeParams.ssn});
-    }, 5000);
+    }, 30000);
 
   });
 };
