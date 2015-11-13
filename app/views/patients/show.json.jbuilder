@@ -1,5 +1,8 @@
 if !@patient.nil?
-  json.extract! @patient, :ssn, :name, :date_of_birth, :gender, :created_at, :updated_at
+  json.ssn            @patient.ssn
+  json.name           @patient.name
+  json.gender         @patient.gender_displayname
+  json.date_of_birth  @patient.date_of_birth
 
   json.reports @patient.reports.all do |report|
     json.name       report.name

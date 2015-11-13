@@ -27,3 +27,10 @@ gem install bundler
 
 cd /vagrant
 bundle install
+
+# Cron jobs
+# Delete expired tokens at midnight.
+cron = "0 0 * * * cd /vagrant && /home/vagrant/.rbenv/shims/rake token:clear"
+echo "$cron" >> mycron
+crontab mycron
+rm mycron
