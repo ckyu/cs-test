@@ -1,5 +1,5 @@
 class PatientsController < ApplicationController
-  before_action :set_patient, only: [:show, :edit, :update, :destroy]
+  before_action :set_patient, only: [:show]
 
   # GET /patients
   # GET /patients.json
@@ -11,47 +11,8 @@ class PatientsController < ApplicationController
   # GET /patients/1.json
   def show
     @patient = Patient.find_by_ssn(params[:ssn])
-    @reports = @patient.reports.all
-    # render json: {:patient=>@patient, :reports=>@reports}
-  end
-
-  # POST /patients
-  # POST /patients.json
-  def create
-    @patient = Patient.new(patient_params)
-
-    respond_to do |format|
-      if @patient.save
-        format.html { redirect_to @patient, notice: 'Patient was successfully created.' }
-        format.json { render :show, status: :created, location: @patient }
-      else
-        format.html { render :new }
-        format.json { render json: @patient.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /patients/1
-  # PATCH/PUT /patients/1.json
-  def update
-    respond_to do |format|
-      if @patient.update(patient_params)
-        format.html { redirect_to @patient, notice: 'Patient was successfully updated.' }
-        format.json { render :show, status: :ok, location: @patient }
-      else
-        format.html { render :edit }
-        format.json { render json: @patient.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /patients/1
-  # DELETE /patients/1.json
-  def destroy
-    @patient.destroy
-    respond_to do |format|
-      format.html { redirect_to patients_url, notice: 'Patient was successfully destroyed.' }
-      format.json { head :no_content }
+    if @patient.nil?
+      render nothing: true, status: 404
     end
   end
 
@@ -61,8 +22,4 @@ class PatientsController < ApplicationController
       @patient = Patient.find_by_ssn(params[:ssn])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def patient_params
-      params.require(:patient).permit(:name, :date_of_birth, :gender, :ssn)
-    end
 end

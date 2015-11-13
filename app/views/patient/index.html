@@ -1,0 +1,18 @@
+<div ng-controller="TestCtrl as test">
+<p>Name: {{patient.name}}</p>
+<p>Birthday: {{patient.date_of_birth}}</p>
+
+<ul>
+  <li ng-repeat="report in patient.reports">{{report.name}}</li>
+</ul>
+
+<div>
+Error: {{error}}
+</div>
+
+<div>
+Message: {{message}}
+</div>
+
+<p>Patient: {{patient}}</p>
+</div>

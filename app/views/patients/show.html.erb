@@ -1,62 +1,66 @@
-<p id="notice"><%= notice %></p>
+<div ng-controller="TestCtrl">
+  <h1>{{name}}</h1>
+  {{1+2}}
+  <p id="notice"><%= notice %></p>
 
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <h2>
-      <%= @patient.name %>
-      <small>#<%= @patient.ssn %></small>
-    </h2>
-  </div>
-  <div class="panel-body">
-    <strong>Date of birth:</strong>
-    <%= @patient.date_of_birth %>
-
-    <br />
-
-    <strong>Gender:</strong>
-    <%= @patient.gender_displayname %>
-  </div>
-</div>
-
-
-<% @reports.each do |report| %>
-  <div class="panel panel-info">
+  <div class="panel panel-primary">
     <div class="panel-heading">
-      <h5><%= report.name %></h5>
+      <h2>
+        <%= @patient.name %>
+        <small>#<%= @patient.ssn %></small>
+      </h2>
+    </div>
+    <div class="panel-body">
+      <strong>Date of birth:</strong>
+      <%= @patient.date_of_birth %>
 
-      <div class="row">
-        <div class="col-md-4"><%= report.physician %></div>
-        <div class="col-md-4"><%= report.date %></div>
-        <div class="col-md-4"><%= report.location %></div>
+      <br />
+
+      <strong>Gender:</strong>
+      <%= @patient.gender_displayname %>
+    </div>
+  </div>
+
+
+  <% @reports.each do |report| %>
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h5><%= report.name %></h5>
+
+        <div class="row">
+          <div class="col-md-4"><%= report.physician %></div>
+          <div class="col-md-4"><%= report.date %></div>
+          <div class="col-md-4"><%= report.location %></div>
+        </div>
+
       </div>
 
-    </div>
-
-    <% if !report.lab_data.blank? %>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Value</th>
-            <th>Unit</th>
-            <th>Normal Range</th>
-          </tr>
-        </thead>
-      <% report.lab_data.each do |data| %>
-
-          <tbody>
+      <% if !report.lab_data.blank? %>
+        <table class="table">
+          <thead>
             <tr>
-              <td><%= data.name %></td>
-              <td><%= data.value %></td>
-              <td><%= data.unit %></td>
-              <td><%= data.normal_range %></td>
+              <th>Name</th>
+              <th>Value</th>
+              <th>Unit</th>
+              <th>Normal Range</th>
             </tr>
-          </tbody>
+          </thead>
+        <% report.lab_data.each do |data| %>
 
+            <tbody>
+              <tr>
+                <td><%= data.name %></td>
+                <td><%= data.value %></td>
+                <td><%= data.unit %></td>
+                <td><%= data.normal_range %></td>
+              </tr>
+            </tbody>
+
+        <% end %>
+        </table>
       <% end %>
-      </table>
-    <% end %>
-  </div>
-<% end %>
+    </div>
+  <% end %>
 
-<%= link_to 'Back', patients_path %>
+  <%= link_to 'Back', patients_path %>
+</div>

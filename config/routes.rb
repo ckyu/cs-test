@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  resources :patients, param: :ssn, only: [:show, :index]
+  resources :patients, param: :ssn, only: [:show, :index], defaults: { :format => 'json'}
   resources :reports, only: [:create], defaults: { :format => 'json'}
 
   post '/save' => 'reports#create'
   post '/token' => 'tokens#new'
+
+  # get '*path', to: 'patient#index' # Actual routing in Angular
+  get '/patient/:ssn' => 'patient#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
