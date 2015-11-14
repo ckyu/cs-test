@@ -11,6 +11,10 @@ class TokenTest < ActiveSupport::TestCase
     assert_not @dup_token.valid?
   end
 
+  test "token is 12 characters long" do
+    assert_equal 12, @token.token.length
+  end
+
   test "expiry" do
     assert_equal 5.seconds.from_now.to_s, @token.expires_on.to_s
   end

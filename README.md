@@ -12,15 +12,11 @@ vagrant up
 
 ## Running and loading data
 
-After provisioning, the web app should already be running at port 80 of the guest machine (forwarded to port 3000 of the host machine). Accessing http://localhost:3000/ will give you a Rails error message about the database not yet being migrated.
+After provisioning, the web app should already be running at port 80 of the guest machine (forwarded to port 3000 of the host machine). Accessing http://localhost:3000/ will a list of 10 patients. 
 
-`cd /vagrant && rake setup:bootstrap`
+`rake demo:load_data` should generate a set of 1-5 lab tests per patient and send it to the app via the /save API.
 
-should do the migration and seed the database with 10 patients. The web app should now list the 10 patients. 
-
-`rake demo:load_data`
-
-should generate a set of 1-5 lab tests per patient and send it to the app via the /save API.
+If unicorn needs to be restarted for whatever reason, do "sudo /home/vagrant/.rbenv/shims/bundle exec unicorn -c config/unicorn.rb -D".
 
 ## Provisioning Errors
 * In case of bundler failing to install a gem / gem being corrupted, remove the folder in cache and re-run the bundle install command.

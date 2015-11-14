@@ -25,6 +25,11 @@ rbenv rehash
 echo "Installing Bundler"
 gem install bundler
 
-cd /vagrant && bundle install
-mkdir /vagrant/tmp/
-mkdir /vagrant/tmp/pids
+echo "Installing gems"
+cd /opt/patient_card && bundle install
+
+# For the unicorn.pid
+if [ ! -d "tmp/" ]; then
+  mkdir tmp/
+  mkdir tmp/pids
+fi
