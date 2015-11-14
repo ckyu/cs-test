@@ -1,30 +1,38 @@
-== README
+# README
 
-Run `vagrant up`
+## Installing
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Clone the repository and run `vagrant up` to fire up the Vagrant machine.
 
-Things you may want to cover:
+```
+git clone http://github.com/ckyu/cs-test.git cs-test
+cd cs-test
+vagrant up
+```
 
-* Ruby version
+## Running and loading data
 
-* System dependencies
+After provisioning, the web app should already be running at port 80 of the guest machine (forwarded to port 3000 of the host machine). Accessing http://localhost:3000/ will give you a Rails error message about the database not yet being migrated.
 
-* Configuration
+`cd /vagrant && rake setup:bootstrap`
 
-* Database creation
+should do the migration and seed the database with 10 patients. The web app should now list the 10 patients. 
 
-* Database initialization
+`rake demo:load_data`
 
-* How to run the test suite
+should generate a set of 1-5 lab tests per patient and send it to the app via the /save API.
 
-* Services (job queues, cache servers, search engines, etc.)
+## Provisioning Errors
+* In case of bundler failing to install a gem / gem being corrupted, remove the folder in cache and re-run the bundle install command.
 
-* Deployment instructions
+eg. 
+```
+Bundler::GemspecError: Could not read gem at /home/vagrant/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/cache/nokogiri-1.6.6.2.gem. It may be corrupted.
+An error occurred while installing nokogiri (1.6.6.2), and Bundler cannot continue.
+Make sure that `gem install nokogiri -v '1.6.6.2'` succeeds before bundling.
+```
 
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+```
+$ rm -rf /home/vagrant/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/cache/nokogiri-1.6.6.2.gem
+$ bundle install
+```
