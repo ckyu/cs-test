@@ -24,7 +24,6 @@ class ApiTest < ActiveSupport::TestCase
 
   test "save should succeed if token is valid" do
     @token = Token.create
-    # session = ActionDispatch::Integration::Session.new(Rails.application)
     @session.post "/save", {token: @token.token, payload: @payload}
     assert_equal 200, @session.response.status
   end

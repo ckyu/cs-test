@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 echo "Updating repository"
-# add-apt-repository -y ppa:chris-lea/node.js
 apt-get -y update > /dev/null
 
 echo "Installing nginx"

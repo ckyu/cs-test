@@ -3,6 +3,8 @@ class LabDatum < ActiveRecord::Base
   attr_accessor :value_min, :value_max
   validates :value, presence: true
 
+  # Return warning or critical if value
+  # is within or exceeds 10% of normal_range
   def label
     parse_normal_range
     if self.critical? 

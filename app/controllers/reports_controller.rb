@@ -34,7 +34,6 @@ class ReportsController < ApplicationController
       @token = Token.find_by(token: params[:token]) || nil
       if @token.nil? || @token.expired?
         render text: "ERROR: Invalid token.", status: 500
-        # redirect_to "/", notice: "Your token is invalid."
       end
     end
 

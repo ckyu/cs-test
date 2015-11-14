@@ -16,7 +16,7 @@ namespace :demo do
       session = ActionDispatch::Integration::Session.new(Rails.application)
 
       # Get token
-      session.post "/token", {application_key: Rails.application.config.application_key}
+      session.post "/token", {application_key: "123456789abcdcaresharing"}
       token = session.response.body
 
       # Deliver patient information

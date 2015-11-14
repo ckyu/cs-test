@@ -1,5 +1,6 @@
 class DataGenerator
 
+  # Generates a set of laboratory test data (default = 1)
   def self.report(num = 1)
     reports = {}
     (0...num).each do
@@ -16,6 +17,7 @@ class DataGenerator
 
   private
 
+    # Return a random report name
     def self.lab_test
       lab_tests = [ "Hgb A1C", 
                     "Urinalysis", 
@@ -35,6 +37,7 @@ class DataGenerator
       return lab_tests.sample
     end
 
+    # Return name of random doctor
     def self.physician
       doctors =  [ "William Hartnell",
                   "Patrick Throughton",
@@ -55,6 +58,7 @@ class DataGenerator
                   "Beverly Crusher" ].sample
     end
 
+    # Return name of random hospital
     def self.location
       places =  [ "Chong Hua",
                   "Medical City",
@@ -64,10 +68,12 @@ class DataGenerator
                   "St. Luke's"].sample
     end
 
+    # Return random date
     def self.time_rand from = 0.0, to = Time.now
       Time.at(from + rand * (to.to_f - from.to_f)).strftime("%Y-%m-%d")
     end
 
+    # Return a set of sample data
     def self.many_data
       data_hash = {}
       (1..rand(1..20)).each do 
@@ -76,6 +82,7 @@ class DataGenerator
       return data_hash
     end
 
+    # Return a name of random sample
     def self.data_name
       name = ["Color", "Appearance",
               "Specific Gravity",
@@ -99,12 +106,10 @@ class DataGenerator
               "Platelet Count"].sample
     end
 
+    # Return single sample data
     def self.data
       units = ["", "/uL", "10^12/L", "%", "g/L", "pg", "fL"]
-      
       data = {}
-
-      # data[name] = {}
 
       case rand(2)
       when 0

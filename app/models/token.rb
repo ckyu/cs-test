@@ -2,6 +2,7 @@ class Token < ActiveRecord::Base
   before_create :generate_access_token
   validates :token, uniqueness: true
 
+  # true if token has expired, false otherwise
   def expired?
     Time.now > self.expires_on
   end
