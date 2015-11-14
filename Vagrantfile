@@ -14,14 +14,9 @@ Vagrant.configure(2) do |config|
     sudo rm /etc/nginx/sites-enabled/default 
     sudo ln -s /vagrant/config/nginx.conf /etc/nginx/sites-enabled/default
     cd /vagrant
-    bundle exec unicorn -c config/unicorn.rb -D
+    /home/vagrant/.rbenv/shims/bundle exec unicorn -c config/unicorn.rb -D
     sudo service nginx restart
   SHELL
-
-  config.vm.provider "virtualbox" do |vb|
-    # Customize the amount of memory on the VM:
-    vb.memory = "1024"
-  end
 
 
 end

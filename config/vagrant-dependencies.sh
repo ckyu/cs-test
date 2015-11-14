@@ -17,8 +17,4 @@ echo "Installing nodejs"
 apt-get -y install nodejs > /dev/null
 
 echo "Installing other dependencies"
-apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev > /dev/null
-
-# echo "Configuring and restarting nginx"
-# sudo mv /home/vagrant/default /etc/nginx/sites-available/default
-# sudo nginx -s reload
+apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev libxml2-dev libxslt-dev > /dev/null

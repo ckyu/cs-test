@@ -26,7 +26,7 @@ class DataGenerator
                     "Thallium, Blood",
                     "Diabetes Mellitus Type 1 Evaluation",
                     "PAP-SMEAR",
-                    "Preganancy Test",
+                    "Pregnancy Test",
                     "Fecalysis",
                     "Chest X-ray",
                     "Comprehensive Metabolic Panel",

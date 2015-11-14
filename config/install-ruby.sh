@@ -22,15 +22,9 @@ rbenv install 2.2.0
 rbenv global 2.2.0
 rbenv rehash
 
-echo "Installing Bundler, Rails and Rake"
+echo "Installing Bundler"
 gem install bundler
 
-cd /vagrant
-bundle install
-
-# Cron jobs
-# Delete expired tokens at midnight.
-cron = "0 0 * * * cd /vagrant && /home/vagrant/.rbenv/shims/rake token:clear"
-echo "$cron" >> mycron
-crontab mycron
-rm mycron
+cd /vagrant && bundle install
+mkdir /vagrant/tmp/
+mkdir /vagrant/tmp/pids
